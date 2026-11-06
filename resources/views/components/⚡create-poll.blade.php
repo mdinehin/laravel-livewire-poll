@@ -15,8 +15,9 @@ new class extends Component
         'options.*' => 'required|min:1|max:255',
     ];
 
-    protected $messages = [
-        'options.*' => 'The option field is required.',
+    // Replace raw array indices with user-friendly names in validation errors
+    protected array $validationAttributes = [
+        'options.*' => 'option',
     ];
 
     /**
@@ -41,6 +42,17 @@ new class extends Component
 
         // Reindex array keys
         $this->options = array_values($this->options);
+    }
+
+    /**
+     * Run after any property on the component is updated.
+     *
+     * @param  string  $propertyName
+     * @return void
+     */
+    public function updated(string $propertyName): void
+    {
+        $this->validateOnly($propertyName);
     }
 
     /**
@@ -96,7 +108,7 @@ new class extends Component
                 <div class="mb-2">
                     <label>Option {{ $index + 1 }}</label>
                     <div class="flex gap-2">
-                        <input type="text" wire:model="options.{{ $index }}" />
+                        <input type="text" wire:model.live="options.{{ $index }}" />
                         <button class="btn" wire:click.prevent="removeOption({{ $index }})">
                             <span>Remove</span>
                         </button>
