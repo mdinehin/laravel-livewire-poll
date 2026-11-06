@@ -28,6 +28,20 @@ new class extends Component
     {
         $this->options[] = '';
     }
+
+    /**
+     * Remove an option from the dynamic options list by its index.
+     *
+     * @param  int  $index
+     * @return void
+     */
+    public function removeOption(int $index): void
+    {
+        unset($this->options[$index]);
+
+        // Reindex array keys
+        $this->options = array_values($this->options);
+    }
 };
 ?>
 
@@ -50,7 +64,15 @@ new class extends Component
 
         <div class="mb-6">
             @foreach($options as $index => $option)
-                <div class="my-2">{{ $index }} - {{ $option }}</div>
+                <div class="mb-2">
+                    <label>Option {{ $index + 1 }}</label>
+                    <div class="mt-2 flex gap-2">
+                        <input type="text" wire:model="options.{{ $index }}" />
+                        <button class="btn" wire:click.prevent="removeOption({{ $index }})">
+                            <span>Remove</span>
+                        </button>
+                    </div>
+                </div>
             @endforeach
         </div>
     </form>
