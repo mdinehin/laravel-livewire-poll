@@ -1,23 +1,13 @@
 <?php
 
+use App\Models\Poll;
 use Livewire\Component;
 
 new class extends Component
 {
-    public string $title;
+    public string $title = '';
 
-    public array $options;
-
-    /**
-     * Initialize the component state.
-     *
-     * @return void
-     */
-    public function mount(): void
-    {
-        $this->title = '';
-        $this->options = [''];
-    }
+    public array $options = [''];
 
     /**
      * Append a new option row to the dynamic options list.
@@ -42,18 +32,40 @@ new class extends Component
         // Reindex array keys
         $this->options = array_values($this->options);
     }
+
+    /**
+     * Persist a new poll and its options to the database.
+     *
+     * @return void
+     */
+    public function createPoll(): void
+    {
+        $poll = Poll::create([
+            'title' => $this->title,
+        ]);
+
+        foreach ($this->options as $optionName) {
+            $poll->options()->create([
+                'name' => $optionName,
+            ]);
+        }
+
+        $this->reset([
+            'title',
+            'options',
+        ]);
+
+        // Add an empty option row after resetting the options list
+        $this->options = [''];
+    }
 };
 ?>
 
 <div>
-    <form class="my-4">
+    <form class="my-4" wire:submit.prevent="createPoll">
         <div class="mb-6">
             <label>Poll Title</label>
             <input type="text" wire:model.live="title"/>
-        </div>
-
-        <div class="mb-6">
-            <span>Current title: {{ $title }}</span>
         </div>
 
         <div class="mb-6">
@@ -75,5 +87,9 @@ new class extends Component
                 </div>
             @endforeach
         </div>
+
+        <button type="submit" class="btn">
+            <span>Create poll</span>
+        </button>
     </form>
 </div>
