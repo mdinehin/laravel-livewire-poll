@@ -14,7 +14,7 @@
         }
 
         label {
-            @apply block uppercase text-slate-700 mb-2
+            @apply block uppercase text-slate-700 mb-1
         }
 
         input,

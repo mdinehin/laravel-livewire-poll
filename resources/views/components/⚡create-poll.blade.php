@@ -9,6 +9,16 @@ new class extends Component
 
     public array $options = [''];
 
+    protected $rules = [
+        'title' => 'required|min:3|max:255',
+        'options' => 'required|array|min:1|max:10',
+        'options.*' => 'required|min:1|max:255',
+    ];
+
+    protected $messages = [
+        'options.*' => 'The option field is required.',
+    ];
+
     /**
      * Append a new option row to the dynamic options list.
      *
@@ -40,6 +50,8 @@ new class extends Component
      */
     public function createPoll(): void
     {
+        $this->validate();
+
         Poll::create([
             'title' => $this->title,
         ])
@@ -68,6 +80,9 @@ new class extends Component
         <div class="mb-6">
             <label>Poll Title</label>
             <input type="text" wire:model.live="title"/>
+            @error('title')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-6">
@@ -80,15 +95,22 @@ new class extends Component
             @foreach($options as $index => $option)
                 <div class="mb-2">
                     <label>Option {{ $index + 1 }}</label>
-                    <div class="mt-2 flex gap-2">
+                    <div class="flex gap-2">
                         <input type="text" wire:model="options.{{ $index }}" />
                         <button class="btn" wire:click.prevent="removeOption({{ $index }})">
                             <span>Remove</span>
                         </button>
                     </div>
+                    @error("options.{$index}")
+                        <div class="text-red-500">{{ $message }}</div>
+                    @enderror
                 </div>
             @endforeach
         </div>
+
+        @error('options')
+            <div class="mb-6 text-red-500">{{ $message }}</div>
+        @enderror
 
         <button type="submit" class="btn">
             <span>Create poll</span>
