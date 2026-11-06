@@ -40,15 +40,17 @@ new class extends Component
      */
     public function createPoll(): void
     {
-        $poll = Poll::create([
+        Poll::create([
             'title' => $this->title,
-        ]);
-
-        foreach ($this->options as $optionName) {
-            $poll->options()->create([
-                'name' => $optionName,
-            ]);
-        }
+        ])
+            ->options()
+            ->createMany(
+                collect($this->options)
+                    ->map(fn ($optionName) => [
+                        'name' => $optionName,
+                    ])
+                    ->all()
+            );
 
         $this->reset([
             'title',
