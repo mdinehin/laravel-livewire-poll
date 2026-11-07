@@ -3,6 +3,7 @@
 use App\Models\Poll;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 new class extends Component
@@ -13,6 +14,7 @@ new class extends Component
      * @return Collection<int, Poll>
      */
     #[Computed]
+    #[On('poll-created')]
     public function polls(): Collection
     {
         return Poll::with('options.votes')

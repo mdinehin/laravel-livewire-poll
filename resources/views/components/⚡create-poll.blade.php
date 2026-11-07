@@ -76,6 +76,8 @@ new class extends Component
                     ->all()
             );
 
+        $this->dispatch('poll-created')->to('display-polls');
+
         $this->reset([
             'title',
             'options',
