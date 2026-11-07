@@ -88,26 +88,26 @@ new class extends Component
 ?>
 
 <div>
-    <form class="my-4" wire:submit.prevent="createPoll">
-        <div class="mb-6">
-            <label>Poll Title</label>
+    <form class="mb-4 flex flex-col gap-6" wire:submit.prevent="createPoll">
+        <div>
+            <label class="mt-4">Poll title</label>
             <input type="text" wire:model.live="title"/>
             @error('title')
                 <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="mb-6">
+        <div>
             <button class="btn" wire:click.prevent="addOption">
                 <span>Add option</span>
             </button>
         </div>
 
-        <div class="mb-6">
+        <ul class="flex flex-col gap-4">
             @foreach($options as $index => $option)
-                <div class="mb-2">
+                <li>
                     <label>Option {{ $index + 1 }}</label>
-                    <div class="flex gap-2">
+                    <div class="flex flex-row gap-2">
                         <input type="text" wire:model.live="options.{{ $index }}" />
                         <button class="btn" wire:click.prevent="removeOption({{ $index }})">
                             <span>Remove</span>
@@ -116,16 +116,18 @@ new class extends Component
                     @error("options.{$index}")
                         <div class="text-red-500">{{ $message }}</div>
                     @enderror
-                </div>
+                </li>
             @endforeach
-        </div>
+        </ul>
 
         @error('options')
-            <div class="mb-6 text-red-500">{{ $message }}</div>
+            <div class="text-red-500">{{ $message }}</div>
         @enderror
 
-        <button type="submit" class="btn">
-            <span>Create poll</span>
-        </button>
+        <div>
+            <button type="submit" class="btn">
+                <span>Create poll</span>
+            </button>
+        </div>
     </form>
 </div>
