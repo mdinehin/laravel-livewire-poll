@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Option;
 use App\Models\Poll;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
@@ -21,6 +22,17 @@ new class extends Component
             ->latest()
             ->get();
     }
+
+    /**
+     * Cast a vote for the specified poll option.
+     *
+     * @param Option $option
+     * @return void
+     */
+    public function castVote(Option $option): void
+    {
+        $option->votes()->create();
+    }
 };
 ?>
 
@@ -33,7 +45,13 @@ new class extends Component
                 <ul class="flex flex-col gap-4">
                     @foreach($poll->options as $option)
                         <li class="flex flex-row gap-2">
-                            <div><button class="btn">Vote</button></div>
+                            <div>
+                                <button class="btn"
+                                    wire:click="castVote({{ $option }})"
+                                >
+                                    <span>Vote</span>
+                                </button>
+                            </div>
                             <div>{{ $option->name }}</div>
                             <div>({{ $option->votes->count() }})</div>
                         </li>
