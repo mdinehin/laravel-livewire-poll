@@ -44,7 +44,7 @@ new class extends Component
 
                 <ul class="flex flex-col gap-4">
                     @foreach($poll->options as $option)
-                        <li class="flex flex-row gap-2">
+                        <li class="flex flex-row items-center gap-2">
                             <div>
                                 <button class="btn"
                                     wire:click="castVote({{ $option }})"
@@ -59,7 +59,7 @@ new class extends Component
                 </ul>
             </li>
         @empty
-            <div class="mb-6 text-gray-500">No polls to display.</div>
+            <div class="mb-6 text-gray-500">No polls available.</div>
         @endforelse
     </ul>
 </div>
