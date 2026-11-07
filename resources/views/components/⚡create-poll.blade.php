@@ -90,17 +90,23 @@ new class extends Component
 ?>
 
 <div>
-    <form class="mb-4 flex flex-col gap-6" wire:submit.prevent="createPoll">
+    <form class="mb-4 flex flex-col gap-6"
+        wire:submit.prevent="createPoll"
+    >
         <div>
             <label class="mt-4">Poll title</label>
-            <input type="text" wire:model.live="title"/>
+            <input type="text"
+                wire:model.live="title"
+            />
             @error('title')
                 <div class="text-red-500">{{ $message }}</div>
             @enderror
         </div>
 
         <div>
-            <button class="btn" wire:click.prevent="addOption">
+            <button class="btn"
+                wire:click.prevent="addOption"
+            >
                 <span>Add option</span>
             </button>
         </div>
@@ -110,8 +116,12 @@ new class extends Component
                 <li>
                     <label>Option {{ $index + 1 }}</label>
                     <div class="flex flex-row gap-2">
-                        <input type="text" wire:model.live="options.{{ $index }}" />
-                        <button class="btn" wire:click.prevent="removeOption({{ $index }})">
+                        <input type="text"
+                            wire:model.live="options.{{ $index }}"
+                        />
+                        <button class="btn"
+                            wire:click.prevent="removeOption({{ $index }})"
+                        >
                             <span>Remove</span>
                         </button>
                     </div>
