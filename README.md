@@ -1,4 +1,4 @@
-# Laravel Livewire Poll App
+# Laravel Livewire Poll
 
 ![Laravel Version](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)
 ![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-777BB4?style=flat-square&logo=php&logoColor=white)
@@ -7,8 +7,8 @@
 ![Livewire Version](https://img.shields.io/badge/Livewire-4.x-4E56A6?style=flat-square&logo=livewire&logoColor=white)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
-<a href="https://github.com/mdinehin/laravel-livewire-poll-app/actions/workflows/tests.yml"><img src="https://github.com/mdinehin/laravel-livewire-poll-app/workflows/Tests/badge.svg" alt="Tests"></a>
-<a href="https://github.com/mdinehin/laravel-livewire-poll-app/actions/workflows/coding-standards.yml"><img src="https://github.com/mdinehin/laravel-livewire-poll-app/actions/workflows/coding-standards.yml/badge.svg" alt="Coding Standards"></a>
+<a href="https://github.com/mdinehin/laravel-livewire-poll/actions/workflows/tests.yml"><img src="https://github.com/mdinehin/laravel-livewire-poll/workflows/Tests/badge.svg" alt="Tests"></a>
+<a href="https://github.com/mdinehin/laravel-livewire-poll/actions/workflows/coding-standards.yml"><img src="https://github.com/mdinehin/laravel-livewire-poll/actions/workflows/coding-standards.yml/badge.svg" alt="Coding Standards"></a>
 
 An interactive polling application built with Laravel 13 and Livewire 4. The application is designed to deliver an accessible and straightforward user experience with real-time input processing, instant inline validation, and a sleek, responsive user interface.
 
@@ -32,7 +32,7 @@ The following software dependencies are required:
 
 ## Installation
 
-1. Clone the repository `git clone https://github.com/mdinehin/laravel-livewire-poll-app.git`
+1. Clone the repository `git clone https://github.com/mdinehin/laravel-livewire-poll.git`
 2. Install PHP dependencies with `composer install`
 3. Copy the `.env.example` file to `.env` and fill in the database credentials
 4. Generate the application key with `php artisan key:generate`
